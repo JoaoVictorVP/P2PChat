@@ -11,20 +11,16 @@ Console.WriteLine("Listening on... " + self);
 
 const int serverPort = 55000;
 
-Console.WriteLine("Want to listen really? [S/N]");
-var listen = Console.ReadKey(true);
-bool doListen = listen.Key == ConsoleKey.S ? true : false;
+var node = new Node(self, serverPort);
 
-var node = new Node(self, serverPort, !doListen);
-
-/*Task.Run(() =>
+Task.Run(() =>
 {
-    while(true)
+    while (true)
     {
         node.DoUpdateStep();
         Thread.Sleep(100);
     }
-});*/
+});
 
 node.OnReceiveMessage += msg => Console.WriteLine(msg);
 
@@ -32,7 +28,7 @@ Console.WriteLine("What do you wanna do? [Connect to peer: C; Send Message: S]")
 
 while (true)
 {
-    node.DoUpdateStep();
+    //node.DoUpdateStep();
 
     if (Console.KeyAvailable)
     {
@@ -57,7 +53,7 @@ while (true)
                 Console.Write("> ");
                 string ip = Console.ReadLine();
 
-                node.Connect(ip, serverPort);
+                node.Connect(ip);
                 break;
         }
     }

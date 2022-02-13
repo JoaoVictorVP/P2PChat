@@ -7,12 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Node.Backup.old" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Node.Backup.old" />
-  </ItemGroup>
-
 </Project>

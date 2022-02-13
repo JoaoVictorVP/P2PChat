@@ -7,6 +7,8 @@ namespace P2PChat;
 
 public partial class NetNode
 {
+    public bool Pending => server.Available > 0;
+
     public int Receive(Span<byte> buffer)
     {
         var totalBufferArr = ArrayPool<byte>.Shared.Rent(MaxPacketSize + confirmationSize);

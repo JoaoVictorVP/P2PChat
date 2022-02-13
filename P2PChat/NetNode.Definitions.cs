@@ -15,14 +15,16 @@ public partial class NetNode
     const int confirmationSize = sizeof(ushort) + sizeof(byte);
 
     Random random = new Random();
-    public NetNode(int port)
+    public NetNode(IPAddress selfIP, int port)
     {
         this.port = port;
 
         server = new Socket(SocketType.Dgram, ProtocolType.Udp);
 
-        IPHostEntry hostEntry = Dns.GetHostEntry(Dns.GetHostName());
-        IPEndPoint endPoint = new IPEndPoint(hostEntry.AddressList[0], port);
+        server.SetSocketOption(SocketOptionLevel.IPv6, SocketOptionName.IPv6Only, 0);
+
+        /*IPHostEntry hostEntry = Dns.GetHostEntry(Dns.GetHostName());*/
+        IPEndPoint endPoint = new IPEndPoint(selfIP, port);
         server.Bind(endPoint);
     }
 

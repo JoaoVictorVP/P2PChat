@@ -40,14 +40,13 @@ public partial class NetNode
 
         ArrayPool<byte>.Shared.Return(packArr);
 
-        var waitTime = TimeSpan.FromSeconds(1);
+        var waitTime = TimeSpan.FromSeconds(3);
 
         server.ReceiveTimeout = (int)waitTime.TotalMilliseconds;
 
-        server.Receive(confirmation);
-
         try
         {
+            server.Receive(confirmation);
             var conf = decomposeConfirmation(confirmation);
             if (conf.id == id)
             {
